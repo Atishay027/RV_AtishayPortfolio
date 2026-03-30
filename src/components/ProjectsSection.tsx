@@ -4,29 +4,40 @@ import { MouseEvent } from "react";
 
 const projects = [
     {
-        title: "CalmCloud — Mental Health App",
+        title: "TeeUPCC — Golf Social Platform",
         description:
-            "A cross-platform mental health and wellness mobile app built with React Native featuring guided meditation, mood tracking, journaling, and therapist booking with real-time chat support.",
-        tech: ["React Native", "Firebase", "Redux", "Socket.IO", "Push Notifications"],
-        features: ["Mood tracking & analytics", "Guided meditation player", "Real-time chat with therapists", "Push notification reminders"],
+            "A comprehensive golf ecosystem merging social networking with utility. Features live scoring, tournament management, and a rich social feed with video trimming and group chat.",
+        tech: ["React Native", "Video Processing", "Real-time Scoring", "E-Commerce", "Socket.io"],
+        features: ["Live scorecard tracking", "Social media feed & group chat", "Tee-time & equipment booking", "Integrated e-commerce shop"],
+        color: "from-emerald-500/20 to-teal-500/20",
+        status: "Development Phase",
+    },
+    {
+        title: "CalmCloud — Student Wellbeing App",
+        description:
+            "A student-focused wellbeing platform built with React Native to promote emotional resilience. Features interactive stress management activities, relaxation tools, and progress tracking shared between students, teachers, and parents.",
+        tech: ["React Native", "Firebase", "Redux", "Push Notifications", "Interactive UI", "Performance Optimization"],
+        features: ["Breathing & relaxation tools", "Educational videos & quizzes", "Student-Teacher-Parent portal", "Guided audio-visual experiences"],
         color: "from-teal-500/20 to-cyan-500/20",
     },
     {
-        title: "Home Services Marketplace",
+        title: "MusicLearn — Music Education App",
         description:
-            "A full-featured mobile marketplace app connecting homeowners with local service providers. Features real-time booking, in-app payments, location-based search, and rating system.",
-        tech: ["React Native", "Firebase", "Google Maps API", "Stripe", "Node.js"],
-        features: ["Real-time booking system", "GPS-based provider matching", "In-app payments via Stripe", "Ratings & review system"],
-        color: "from-blue-500/20 to-indigo-500/20",
-    },
-    {
-        title: "Music Learning Academy",
-        description:
-            "An interactive music learning platform mobile app with video lessons, practice tracking, progress dashboard, and instrument tutorials for students of all levels.",
-        tech: ["React Native", "Supabase", "Zustand", "Video Player", "REST API"],
-        features: ["Video lesson streaming", "Practice session tracker", "Progress dashboard", "Instrument-specific courses"],
+            "An interactive music education platform for students and teachers. Offers structured lessons for piano, guitar, cello, and violin, featuring quizzes and live sessions to improve skills through engaging activities.",
+        tech: ["React Native", "Live Streaming", "Firebase", "Interactive Quizzes", "Video lesson streaming", "Practice session tracker"],
+        features: ["Instrument-specific courses", "Live interactive sessions", "Skill-building quizzes", "Personalized progress tracking"],
         color: "from-purple-500/20 to-pink-500/20",
     },
+    /* 
+    {
+        title: "BidNinja — AI Home Improvement",
+        description:
+            "An AI-powered home improvement marketplace that streamlines project bidding using computer vision. Analyzes user-submitted media to extract project details, allowing contractors to provide accurate remote bids without on-site visits.",
+        tech: ["React Native", "AI/Computer Vision", "Firebase", "Node.js", "Stripe"],
+        features: ["AI photo/video analysis", "Remote bidding system", "Verified professional matching", "Real-time project management"],
+        color: "from-blue-500/20 to-indigo-500/20",
+    },
+    */
 ];
 
 const containerVariants = {
@@ -42,10 +53,10 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-        opacity: 1, 
-        y: 0, 
-        transition: { type: "spring", stiffness: 80, damping: 12 } 
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { type: "spring", stiffness: 80, damping: 12 }
     },
 };
 
@@ -88,7 +99,14 @@ const ProjectCard = ({ proj }: { proj: any }) => {
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{proj.title}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                        <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{proj.title}</h3>
+                        {proj.status && (
+                            <span className="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-primary/10 text-primary border border-primary/20 uppercase tracking-wider animate-pulse">
+                                {proj.status}
+                            </span>
+                        )}
+                    </div>
                     <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">{proj.description}</p>
 
                     <div className="mb-6">
@@ -131,7 +149,7 @@ const ProjectsSection = () => {
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-12" />
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
