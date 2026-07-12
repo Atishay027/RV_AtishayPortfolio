@@ -31,7 +31,7 @@ const itemVariants = {
 
 const StatsSection = () => {
     return (
-        <section className="py-12 relative z-20">
+        <section className="section-padding theme-beige bg-[#f7f1df] relative z-20 group section-hover-heading">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
                 <motion.div
                     variants={containerVariants}
@@ -45,15 +45,15 @@ const StatsSection = () => {
                             key={stat.label}
                             variants={itemVariants}
                             whileHover={{ y: -5, scale: 1.02 }}
-                            className="p-6 rounded-2xl bg-surface/50 border border-border/50 backdrop-blur-md shadow-lg text-center flex flex-col justify-center items-center hover:border-primary/30 transition-all duration-300"
+                            className="p-6 rounded-2xl bg-card/95 border border-border/70 shadow-lg text-center flex flex-col justify-center items-center hover:border-primary/30 transition-all duration-300"
                         >
-                            <span className="text-3xl font-display font-bold text-gradient mb-1">
+                            <span className="text-3xl font-display font-bold text-foreground mb-1">
                                 {stat.value}
                             </span>
-                            <span className="text-sm font-semibold text-foreground mb-0.5">
+                            <span className="text-sm font-semibold text-primary mb-0.5">
                                 {stat.label}
                             </span>
-                            <span className="text-xs text-muted-foreground opacity-70">
+                            <span className="text-xs text-foreground/70">
                                 {stat.suffix}
                             </span>
                         </motion.div>

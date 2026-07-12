@@ -30,7 +30,7 @@ const highlights = [
 
 const AboutSection = () => {
     return (
-        <section id="about" className="section-padding">
+        <section id="about" className="section-padding theme-green bg-background group section-hover-heading">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     variants={containerVariants}
@@ -38,14 +38,21 @@ const AboutSection = () => {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                 >
-                    <motion.h2 variants={itemVariants} className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                        About <span className="text-gradient">Me</span>
-                    </motion.h2>
-                    <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-primary rounded-full mb-8" />
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <motion.h2 variants={itemVariants} className="font-display text-3xl sm:text-4xl font-bold mb-4 heading-hide">
+                            <span className="text-foreground">About</span> <span className="text-[#f7f1df]">Me</span>
+                        </motion.h2>
+                        <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-primary rounded-full mb-8" />
+                    </motion.div>
 
                     <div className="grid lg:grid-cols-2 gap-12">
-                        <motion.div variants={itemVariants} className="space-y-6 text-muted-foreground leading-relaxed text-balance">
-                            <p className="border-l-2 border-primary/20 pl-4">
+                        <motion.div variants={itemVariants} className="space-y-6 text-foreground/90 leading-relaxed text-balance">
+                            <p className="border-l-2 border-primary/30 pl-4 text-foreground/90">
                                 I follow a structured mobile application development workflow starting from requirement analysis and UI/UX design in Figma, followed by cross-platform mobile development using React Native (Expo or CLI). I implement scalable state management using Redux or Zustand and integrate REST APIs with backend services such as Firebase and Supabase.
                             </p>
                             <p className="border-l-2 border-primary/20 pl-4">
@@ -54,10 +61,10 @@ const AboutSection = () => {
                             <p className="border-l-2 border-primary/20 pl-4">
                                 I also use CI/CD pipelines to automate builds, testing, and deployment processes for Android and iOS applications. Android builds are generated using Android Studio and iOS builds using Xcode, followed by deployment to the Google Play Store and Apple App Store.
                             </p>
-                            <p className="border-l-2 border-primary/20 pl-4 italic opacity-80">
+                            <p className="border-l-2 border-primary/30 pl-4 italic text-foreground/80">
                                 Post-deployment, I monitor application performance, fix issues, and continuously improve features, performance, and user experience through iterative updates and releases.
                             </p>
-                            <p className="border-l-2 border-primary/20 pl-4 font-medium text-foreground/90">
+                            <p className="border-l-2 border-primary/30 pl-4 font-medium text-foreground/90">
                                 I also leverage AI-assisted development workflows and structured project documentation to improve development speed, maintain consistency, and automate repetitive development tasks.
                             </p>
                         </motion.div>
@@ -67,16 +74,24 @@ const AboutSection = () => {
                                 <motion.div
                                     key={item.title}
                                     variants={itemVariants}
-                                    whileHover={{ y: -5 }}
-                                    className="p-5 rounded-xl bg-surface hover:glow-primary-sm transition-all shadow-md border border-border/50 group"
+                                    whileHover={{ y: -8, scale: 1.01, rotateX: 2 }}
+                                    className="p-5 rounded-xl bg-[#f7f1df] hover:glow-primary-sm transition-all shadow-md border border-[#e8dcc4] group"
                                 >
-                                    <item.icon className="text-primary mb-3 group-hover:scale-110 transition-transform origin-left" size={24} />
-                                    <h3 className="font-display font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                                    <item.icon className="text-green-700 mb-3 group-hover:scale-110 transition-transform origin-left" size={24} />
+                                    <h3 className="font-display font-semibold text-[#2d5a3d] mb-1 heading-hide transition-colors">{item.title}</h3>
+                                    <p className="text-sm text-[#4a6b5b]">{item.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
+
+                    <motion.div variants={itemVariants} className="mt-12">
+                        <img
+                            src="/assets/profileimage/laptopcover.png"
+                            alt="Portfolio website preview on a laptop"
+                            className="w-[70%] mx-auto h-auto rounded-2xl shadow-2xl block"
+                        />
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

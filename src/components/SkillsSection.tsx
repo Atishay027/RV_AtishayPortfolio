@@ -1,4 +1,13 @@
 import { motion } from "framer-motion";
+import {
+    FiCode,
+    FiSmartphone,
+    FiServer,
+    FiLayers,
+    FiCheckCircle,
+    FiTool,
+    FiCpu,
+} from "react-icons/fi";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -42,50 +51,59 @@ const pillVariants = {
 const skillCategories = [
     {
         title: "Languages",
-        skills: ["JavaScript", "TypeScript", "Python", "C++"],
+        icon: FiCode,
+        skills: ["TypeScript", "JavaScript (ES6+)", "Python", "C++"],
     },
     {
-        title: "Frameworks & Libraries",
-        skills: ["React Native", "Express.js", "React.js", "Node.js"],
+        title: "Mobile & Frontend",
+        icon: FiSmartphone,
+        skills: ["React Native", "React.js", "Redux", "Zustand", "React Navigation", "NativeWind", "MMKV"],
     },
     {
-        title: "Mobile Development",
-        skills: ["React Native", "Expo", "Android Studio", "Xcode", "App Store Deployment", "Play Store Deployment", "Push Notifications", "Deep Linking"],
+        title: "Backend & Data",
+        icon: FiServer,
+        skills: ["FastAPI", "PostgreSQL", "Node.js", "Express.js", "Firebase", "Supabase", "REST APIs", "GraphQL Basics", "Socket.IO"],
     },
     {
-        title: "State Management",
-        skills: ["Redux", "Zustand", "Context API"],
+        title: "App Experience",
+        icon: FiLayers,
+        skills: ["Push Notifications", "Deep Linking", "Authentication", "Onboarding Flows", "Performance Optimization"],
     },
     {
-        title: "Backend & APIs",
-        skills: ["REST APIs", "Firebase", "Supabase", "Socket.IO", "Authentication"],
+        title: "Testing & Delivery",
+        icon: FiCheckCircle,
+        skills: ["Jest", "React Native Testing Library", "GitHub Actions", "App Store Connect", "Play Console", "CI/CD"],
     },
     {
-        title: "Testing & Quality",
-        skills: ["Jest", "Maestro", "ESLint", "Prettier", "Husky"],
+        title: "Tools & Methodologies",
+        icon: FiTool,
+        skills: ["Git", "GitHub", "GitLab", "Docker", "Android Studio", "Xcode", "Jira", "Figma", "Postman", "Agile/Scrum", "Code Reviews", "DSA", "OOPs"],
     },
     {
-        title: "Tools & DevOps",
-        skills: ["Git", "GitHub", "GitLab", "CI/CD", "Jira", "Figma", "Docker"],
-    },
-    {
-        title: "Core Concepts",
-        skills: ["Data Structures", "OOPS", "Pagination", "Performance Optimization"],
+        title: "AI & Productivity",
+        icon: FiCpu,
+        skills: ["Claude Code", "Cursor", "Prompt Engineering", "AI-assisted Development"],
     },
 ];
 
 const SkillsSection = () => {
     return (
-        <section id="skills" className="section-padding bg-card/30">
+        <section id="skills" className="section-padding theme-beige bg-[#f7f1df] group section-hover-heading">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
+                    className="relative"
                 >
-                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                        Technical <span className="text-gradient">Skills</span>
+                    <motion.div
+                        animate={{ y: [0, -6, 0], scale: [1, 1.02, 1] }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -top-8 right-0 h-24 w-24 rounded-full bg-primary/10 blur-3xl"
+                    />
+                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 heading-hide">
+                        <span className="text-foreground">Technical</span> <span className="text-primary">Skills</span>
                     </h2>
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-10" />
                 </motion.div>
@@ -101,10 +119,13 @@ const SkillsSection = () => {
                         <motion.div
                             key={cat.title}
                             variants={cardVariants}
-                            whileHover={{ y: -5 }}
-                            className="p-6 rounded-xl bg-surface hover:glow-primary-sm transition-all shadow-lg border border-border/50"
+                            whileHover={{ y: -8, scale: 1.01, rotateX: 2 }}
+                            className="p-6 rounded-xl bg-card/95 hover:glow-primary-sm transition-all shadow-lg border border-border/70"
                         >
-                            <h3 className="font-display font-semibold text-primary mb-4">{cat.title}</h3>
+                            <h3 className="flex items-center gap-2 font-display font-semibold text-primary mb-4 heading-hide">
+                                <cat.icon size={18} className="shrink-0" />
+                                {cat.title}
+                            </h3>
                             <motion.div
                                 variants={pillContainerVariants}
                                 initial="hidden"

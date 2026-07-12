@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { ModeToggle } from "./mode-toggle";
+// import { ModeToggle } from "./mode-toggle";
 import Magnetic from "@/components/ui/magnetic";
 
 const navLinks = [
@@ -31,8 +31,8 @@ const Navbar = () => {
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
-                <a href="#" className="font-display text-xl font-bold text-gradient">
-                    AJ<span className="text-foreground">.</span>
+                <a href="#" className="font-display text-xl font-bold text-foreground tracking-tight">
+                    AJ<span className="text-primary">.</span>
                 </a>
 
                 {/* Desktop */}
@@ -41,23 +41,23 @@ const Navbar = () => {
                         <Magnetic key={l.href} amount={0.3}>
                             <a
                                 href={l.href}
-                                className="text-sm text-muted-foreground hover:text-primary transition-colors block px-2 py-1"
+                                className="text-base font-semibold text-foreground hover:text-[#f7f1df] transition-colors block px-3 py-2"
                             >
                                 {l.label}
                             </a>
                         </Magnetic>
                     ))}
                     
-                    <Magnetic amount={0.3}>
+                    {/* <Magnetic amount={0.3}>
                         <div>
                             <ModeToggle />
                         </div>
-                    </Magnetic>
+                    </Magnetic> */}
 
                     <Magnetic amount={0.2}>
                         <a
                             href="#contact"
-                            className="text-sm px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground font-medium hover:opacity-90 shadow-lg glow-primary-sm transition block"
+                            className="text-base px-6 py-2.5 rounded-lg bg-gradient-primary text-primary-foreground font-bold hover:opacity-90 shadow-lg glow-primary-sm transition block"
                         >
                             Hire Me
                         </a>
@@ -88,18 +88,18 @@ const Navbar = () => {
                                     key={l.href}
                                     href={l.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className="text-sm text-muted-foreground hover:text-primary py-2"
+                                    className="text-base font-semibold text-foreground hover:text-[#f7f1df] py-2 transition-colors"
                                 >
                                     {l.label}
                                 </a>
                             ))}
-                            <div className="flex justify-center my-2">
+                            {/* <div className="flex justify-center my-2">
                                 <ModeToggle />
-                            </div>
+                            </div> */}
                             <a
                                 href="#contact"
                                 onClick={() => setMobileOpen(false)}
-                                className="text-sm px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground font-medium text-center"
+                                className="text-base px-6 py-2.5 rounded-lg bg-gradient-primary text-primary-foreground font-bold text-center hover:opacity-90 transition"
                             >
                                 Hire Me
                             </a>
