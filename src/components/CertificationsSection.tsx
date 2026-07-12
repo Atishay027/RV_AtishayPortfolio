@@ -59,7 +59,7 @@ const cardVariants = {
 
 const CertificationsSection = () => {
     return (
-        <section id="certifications" className="section-padding bg-card/20 relative overflow-hidden">
+        <section id="certifications" className="section-padding theme-beige bg-[#f7f1df] relative overflow-hidden group section-hover-heading">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
             
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
@@ -71,8 +71,8 @@ const CertificationsSection = () => {
                 >
                     <div className="flex items-center gap-3 mb-4">
                         <FiAward className="text-primary text-2xl" />
-                        <h2 className="font-display text-3xl sm:text-4xl font-bold">
-                            Professional <span className="text-gradient">Certifications</span>
+                        <h2 className="font-display text-3xl sm:text-4xl font-bold heading-hide">
+                            <span className="text-foreground">Professional</span> <span className="text-primary">Certifications</span>
                         </h2>
                     </div>
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-12" />
@@ -92,8 +92,8 @@ const CertificationsSection = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             variants={cardVariants}
-                            whileHover={{ y: -5 }}
-                            className="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-surface border border-border/50 hover:border-primary/30 transition-all duration-500 shadow-lg hover:shadow-primary/5 cursor-pointer block"
+                            whileHover={{ y: -8, scale: 1.01, rotateX: 2 }}
+                            className="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-card/95 border border-border/60 hover:border-primary/30 transition-all duration-500 shadow-lg hover:shadow-primary/5 cursor-pointer block"
                         >
                             {/* Image Preview */}
                             <div className="w-full md:w-48 h-32 md:h-auto shrink-0 rounded-xl overflow-hidden relative">
@@ -111,10 +111,10 @@ const CertificationsSection = () => {
                             <div className="flex-1 flex flex-col">
                                 <div className="mb-3">
                                     <span className="text-xs font-semibold text-primary/80 uppercase tracking-wider">{cert.issuer}</span>
-                                    <h3 className="text-xl font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{cert.name}</h3>
+                                    <h3 className="text-xl font-bold text-foreground mt-1 heading-hide transition-colors">{cert.name}</h3>
                                 </div>
                                 
-                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                                <p className="text-sm text-foreground/80 leading-relaxed mb-4">
                                     {cert.description}
                                 </p>
 

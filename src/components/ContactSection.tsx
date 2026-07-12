@@ -56,16 +56,22 @@ const ContactSection = () => {
     };
 
     return (
-        <section id="contact" className="section-padding bg-card/30">
+        <section id="contact" className="section-padding theme-green bg-background group section-hover-heading">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
+                    className="relative"
                 >
-                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                        Get In <span className="text-gradient">Touch</span>
+                    <motion.div
+                        animate={{ y: [0, -8, 0], opacity: [0.4, 0.7, 0.4] }}
+                        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -top-6 right-4 h-20 w-20 rounded-full bg-primary/10 blur-3xl"
+                    />
+                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 heading-hide">
+                        <span className="text-foreground">Get In</span> <span className="text-[#f7f1df]">Touch</span>
                     </h2>
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-10" />
                 </motion.div>
@@ -78,28 +84,29 @@ const ContactSection = () => {
                         viewport={{ once: true }}
                         className="space-y-6"
                     >
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-foreground/90 leading-relaxed">
                             I'm always open to discussing new mobile app projects, creative ideas, or opportunities
                             to be part of your vision. Feel free to reach out!
                         </p>
 
                         <div className="space-y-4">
                             {contactInfo.map((info) => (
-                                <a
+                                <motion.a
                                     key={info.label}
                                     href={info.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-4 p-4 rounded-xl bg-surface hover:border-primary/50 border border-border transition group"
+                                    whileHover={{ x: 4, y: -3, scale: 1.01 }}
+                                    className="flex items-center gap-4 p-4 rounded-xl bg-card/95 hover:border-primary/50 border border-border transition group"
                                 >
-                                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                                        <info.icon className="text-primary" size={18} />
+                                    <div className="w-10 h-10 rounded-lg bg-[#f7f1df] flex items-center justify-center">
+                                        <info.icon className="text-green-700" size={18} />
                                     </div>
                                     <div>
-                                        <p className="text-xs text-muted-foreground">{info.label}</p>
-                                        <p className="text-sm text-foreground group-hover:text-primary transition-colors">{info.value}</p>
+                                        <p className="text-xs text-foreground/70">{info.label}</p>
+                                        <p className="text-sm text-foreground transition-colors">{info.value}</p>
                                     </div>
-                                </a>
+                                </motion.a>
                             ))}
                         </div>
                     </motion.div>
@@ -113,38 +120,38 @@ const ContactSection = () => {
                         className="space-y-4"
                     >
                         <div>
-                            <label className="text-sm text-muted-foreground mb-1.5 block">Name</label>
+                            <label className="text-sm text-foreground/70 mb-1.5 block">Name</label>
                             <input
                                 type="text"
                                 required
                                 value={form.name}
                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                                 disabled={isSubmitting}
-                                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:border-primary transition placeholder:text-muted-foreground/50 disabled:opacity-50"
+                                className="w-full px-4 py-3 rounded-lg bg-secondary/80 border border-border text-foreground text-sm focus:outline-none focus:border-primary transition placeholder:text-muted-foreground/50 disabled:opacity-50 opacity-100"
                                 placeholder="Your name"
                             />
                         </div>
                         <div>
-                            <label className="text-sm text-muted-foreground mb-1.5 block">Email</label>
+                            <label className="text-sm text-foreground/70 mb-1.5 block">Email</label>
                             <input
                                 type="email"
                                 required
                                 value={form.email}
                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                                 disabled={isSubmitting}
-                                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:border-primary transition placeholder:text-muted-foreground/50 disabled:opacity-50"
+                                className="w-full px-4 py-3 rounded-lg bg-secondary/80 border border-border text-foreground text-sm focus:outline-none focus:border-primary transition placeholder:text-muted-foreground/50 disabled:opacity-50 opacity-100"
                                 placeholder="your@email.com"
                             />
                         </div>
                         <div>
-                            <label className="text-sm text-muted-foreground mb-1.5 block">Message</label>
+                            <label className="text-sm text-foreground/70 mb-1.5 block">Message</label>
                             <textarea
                                 required
                                 rows={5}
                                 value={form.message}
                                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                                 disabled={isSubmitting}
-                                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:border-primary transition resize-none placeholder:text-muted-foreground/50 disabled:opacity-50"
+                                className="w-full px-4 py-3 rounded-lg bg-secondary/80 border border-border text-foreground text-sm focus:outline-none focus:border-primary transition resize-none placeholder:text-muted-foreground/50 disabled:opacity-50 opacity-100"
                                 placeholder="Tell me about your project..."
                             />
                         </div>

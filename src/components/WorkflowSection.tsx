@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { 
+import {
     FiTarget, 
     FiPenTool, 
     FiCode, 
@@ -60,17 +60,22 @@ const steps = [
 
 const WorkflowSection = () => {
     return (
-        <section id="workflow" className="section-padding bg-card/10 overflow-hidden">
+        <section id="workflow" className="section-padding theme-beige bg-[#f7f1df] overflow-hidden group section-hover-heading">
             <div className="max-w-[1400px] mx-auto">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="max-w-7xl mx-auto px-4 md:px-8"
+                    className="max-w-7xl mx-auto px-4 md:px-8 relative"
                 >
-                    <motion.h2 variants={itemVariants} className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                        Development <span className="text-gradient">Workflow</span>
+                    <motion.div
+                        animate={{ y: [0, -8, 0], opacity: [0.3, 0.7, 0.3] }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -top-4 right-4 h-16 w-16 rounded-full bg-primary/10 blur-3xl"
+                    />
+                    <motion.h2 variants={itemVariants} className="font-display text-3xl sm:text-4xl font-bold mb-4 heading-hide">
+                        <span className="text-foreground">Development</span> <span className="text-primary">Workflow</span>
                     </motion.h2>
                     <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-primary rounded-full mb-10" />
                 </motion.div>
@@ -112,9 +117,9 @@ const WorkflowSection = () => {
                                 </div>
                                 
                                 {/* Content Card */}
-                                <div className="relative z-10 p-6 rounded-xl bg-surface border border-border/50 shadow-md group-hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.2)] transition-all text-center h-[180px] flex flex-col justify-center">
-                                    <h3 className="font-display font-semibold text-foreground text-sm mb-3 group-hover:text-primary transition-colors leading-tight">{step.title}</h3>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
+                                <div className="relative z-10 p-6 rounded-xl bg-card/95 border border-border/60 shadow-md group-hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.2)] transition-all text-center h-[180px] flex flex-col justify-center">
+                                    <h3 className="font-display font-semibold text-foreground text-sm mb-3 heading-hide transition-colors leading-tight">{step.title}</h3>
+                                    <p className="text-xs text-foreground/80 leading-relaxed">{step.desc}</p>
                                 </div>
                             </motion.div>
                         ))}

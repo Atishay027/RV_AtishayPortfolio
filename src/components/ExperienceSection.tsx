@@ -58,16 +58,22 @@ const experiences = [
 
 const ExperienceSection = () => {
     return (
-        <section id="experience" className="section-padding">
+        <section id="experience" className="section-padding theme-green bg-background group section-hover-heading">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
+                    className="relative"
                 >
-                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                        Work <span className="text-gradient">Experience</span>
+                    <motion.div
+                        animate={{ y: [0, -8, 0], opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -top-6 right-0 h-20 w-20 rounded-full bg-primary/10 blur-3xl"
+                    />
+                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 heading-hide">
+                        <span className="text-foreground">Work</span> <span className="text-[#f7f1df]">Experience</span>
                     </h2>
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-10" />
                 </motion.div>
@@ -90,23 +96,26 @@ const ExperienceSection = () => {
                                 className="relative pl-12 md:pl-16 group"
                             >
                                 {/* Dot */}
-                                <div className="absolute left-2.5 md:left-4.5 top-1.5 w-3 h-3 rounded-full bg-primary glow-primary-sm group-hover:scale-150 transition-transform duration-300 z-10" />
+                                <div className="absolute left-2.5 md:left-4.5 top-1.5 w-3 h-3 rounded-full bg-green-600 glow-primary-sm group-hover:scale-150 transition-transform duration-300 z-10" />
 
-                                <div className="p-6 rounded-xl bg-surface border border-border/50 shadow-md group-hover:glow-primary-sm group-hover:-translate-y-1 transition-all duration-300">
+                                <motion.div
+                                    whileHover={{ y: -6, scale: 1.01, rotateX: 2 }}
+                                    className="p-6 rounded-xl bg-[#f7f1df] border border-[#e8dcc4] shadow-md group-hover:glow-primary-sm transition-all duration-300"
+                                >
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
-                                        <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{exp.company}</h3>
-                                        <span className="text-xs font-mono-code text-primary/80 bg-primary/10 px-2.5 py-1 rounded-md mt-2 sm:mt-0">{exp.period}</span>
+                                        <h3 className="font-display font-semibold text-lg text-[#2d5a3d] heading-hide transition-colors">{exp.company}</h3>
+                                        <span className="text-xs font-mono-code text-green-700 bg-green-600/10 px-2.5 py-1 rounded-md mt-2 sm:mt-0">{exp.period}</span>
                                     </div>
-                                    <p className="text-sm text-muted-foreground mb-4 font-medium">{exp.role}</p>
+                                    <p className="text-sm text-[#4a6b5b] mb-4 font-medium">{exp.role}</p>
                                     <ul className="space-y-2">
                                         {exp.points.map((p, j) => (
-                                            <li key={j} className="text-sm text-muted-foreground flex gap-2.5 items-start">
-                                                <span className="text-primary mt-0.5 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">▸</span>
+                                            <li key={j} className="text-sm text-[#4a6b5b] flex gap-2.5 items-start">
+                                                <span className="text-green-700 mt-0.5 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">▸</span>
                                                 <span className="leading-relaxed">{p}</span>
                                             </li>
                                         ))}
                                     </ul>
-                                </div>
+                                </motion.div>
                             </motion.div>
                         ))}
                     </motion.div>
