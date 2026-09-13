@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FiExternalLink, FiAward, FiCheck } from "react-icons/fi";
 import Magnetic from "./ui/magnetic";
 
@@ -50,24 +50,26 @@ const containerVariants = {
 
 const cardVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: { 
-        opacity: 1, 
-        y: 0, 
-        transition: { type: "spring", stiffness: 60, damping: 12 } 
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
 
 const CertificationsSection = () => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section id="certifications" className="section-padding theme-beige bg-[#f7f1df] relative overflow-hidden group section-hover-heading">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-            
+
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
                 >
                     <div className="flex items-center gap-3 mb-4">
                         <FiAward className="text-primary text-2xl" />
@@ -80,7 +82,7 @@ const CertificationsSection = () => {
 
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
+                    initial={shouldReduceMotion ? false : "hidden"}
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     className="grid md:grid-cols-2 gap-8"
@@ -97,9 +99,11 @@ const CertificationsSection = () => {
                         >
                             {/* Image Preview */}
                             <div className="w-full md:w-48 h-32 md:h-auto shrink-0 rounded-xl overflow-hidden relative">
-                                <img 
-                                    src={cert.image} 
+                                <img
+                                    src={cert.image}
                                     alt={cert.name}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FiMail, FiPhone, FiGithub, FiLinkedin, FiSend, FiLoader } from "react-icons/fi";
 import { toast } from "@/components/ui/sonner";
 
@@ -10,7 +10,28 @@ const contactInfo = [
     { icon: FiGithub, label: "GitHub", value: "github.com/Atishay027", href: "https://github.com/Atishay027" },
 ];
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.08,
+            delayChildren: 0.1,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.35, ease: "easeOut" },
+    },
+};
+
 const ContactSection = () => {
+    const shouldReduceMotion = useReducedMotion();
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -59,14 +80,14 @@ const ContactSection = () => {
         <section id="contact" className="section-padding theme-green bg-background group section-hover-heading">
             <div className="max-w-7xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
                     className="relative"
                 >
                     <motion.div
-                        animate={{ y: [0, -8, 0], opacity: [0.4, 0.7, 0.4] }}
+                        animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], opacity: [0.4, 0.7, 0.4] }}
                         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute -top-6 right-4 h-20 w-20 rounded-full bg-primary/10 blur-3xl"
                     />
@@ -79,23 +100,31 @@ const ContactSection = () => {
                 <div className="grid lg:grid-cols-2 gap-12">
                     {/* Contact info */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
                         className="space-y-6"
                     >
                         <p className="text-foreground/90 leading-relaxed">
-                            I'm always open to discussing new mobile app projects, creative ideas, or opportunities
+                            I'm always open to discussing new mobile app and web projects, creative ideas, or opportunities
                             to be part of your vision. Feel free to reach out!
                         </p>
 
-                        <div className="space-y-4">
+                        <motion.div
+                            variants={containerVariants}
+                            initial={shouldReduceMotion ? false : "hidden"}
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="space-y-4"
+                        >
                             {contactInfo.map((info) => (
                                 <motion.a
                                     key={info.label}
                                     href={info.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    variants={itemVariants}
                                     whileHover={{ x: 4, y: -3, scale: 1.01 }}
                                     className="flex items-center gap-4 p-4 rounded-xl bg-card/95 hover:border-primary/50 border border-border transition group"
                                 >
@@ -108,14 +137,15 @@ const ContactSection = () => {
                                     </div>
                                 </motion.a>
                             ))}
-                        </div>
+                        </motion.div>
                     </motion.div>
 
                     {/* Contact form */}
                     <motion.form
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
                         onSubmit={handleSubmit}
                         className="space-y-4"
                     >

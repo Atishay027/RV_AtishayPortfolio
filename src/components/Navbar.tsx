@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 // import { ModeToggle } from "./mode-toggle";
 import Magnetic from "@/components/ui/magnetic";
@@ -16,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -25,7 +26,7 @@ const Navbar = () => {
 
     return (
         <motion.nav
-            initial={{ y: -100 }}
+            initial={shouldReduceMotion ? false : { y: -100 }}
             animate={{ y: 0 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-glass shadow-lg" : "bg-transparent"
                 }`}
@@ -68,6 +69,8 @@ const Navbar = () => {
                 <button
                     className="md:hidden text-foreground"
                     onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={mobileOpen}
                 >
                     {mobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
                 </button>

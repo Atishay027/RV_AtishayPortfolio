@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const stats = [
-    { label: "Experience", value: "3+", suffix: "Years" },
-    { label: "Apps Built", value: "5+", suffix: "Projects" },
+    { label: "Experience", value: "3.8+", suffix: "Years" },
+    { label: "Apps & Web Panels", value: "9+", suffix: "Shipped" },
     { label: "Store Releases", value: "10+", suffix: "Versions" },
     { label: "Users Impacted", value: "10K+", suffix: "Users" },
     { label: "Features Built", value: "50+", suffix: "Modules" },
@@ -22,20 +22,22 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-        opacity: 1, 
-        scale: 1, 
-        transition: { type: "spring", stiffness: 100, damping: 15 } 
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.35, ease: "easeOut" },
     },
 };
 
 const StatsSection = () => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section className="section-padding theme-beige bg-[#f7f1df] relative z-20 group section-hover-heading">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
+                    initial={shouldReduceMotion ? false : "hidden"}
                     whileInView="visible"
                     viewport={{ once: true }}
                     className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"

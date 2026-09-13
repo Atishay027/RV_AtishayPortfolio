@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -13,62 +13,62 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { opacity: 0, x: -30 },
-    visible: { 
-        opacity: 1, 
-        x: 0, 
-        transition: { type: "spring", stiffness: 70, damping: 14 } 
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
 
 const experiences = [
     {
         company: "Dotsquares Technologies",
-        role: "Associate Programmer (React Native Developer)",
+        role: "Associate Programmer (Full-Stack & Mobile)",
         period: "Sep 2025 – Present",
         points: [
-            "Worked on TeeUPCC App, a multi-module golf booking and social commerce platform, contributing to 10+ core features including course/event booking, live scorecards, in-app chat, social feeds, and e-commerce.",
-            "Developed and maintained 2+ scalable cross-platform mobile applications using React Native for mental wellbeing (CalmCloud) and safety (HomeSafeAlert) domains.",
-            "Modernized 1+ live mobile applications by replacing deprecated libraries, improving navigation architecture, and applying performance optimization techniques to enhance scalability.",
-            "Executed end-to-end mobile app releases for iOS and Android, managing sprint-based development, Jira ticket tracking, build generation, and store compliance.",
-            "Collaborated with cross-functional teams (UI/UX, Backend, QA) to deliver high-quality features following Agile/Scrum methodologies and strict production timelines.",
+            "Mobile: Contributed to 10+ core features on a Golf Enterprise Community App, a multi-module React Native golf booking and social-commerce platform — course/event booking, live scorecards, in-app chat, social feeds, food ordering, e-commerce, and subscriptions.",
+            "Mobile: Engineered and bridged 3-5 custom native modules (Swift on iOS, Kotlin on Android) to integrate vendor SDKs beyond standard RN libraries, and implemented offline caching for core flows; enabled Hermes and explored Fabric/TurboModules (New Architecture).",
+            "Backend/Web: Architected backend services with FastAPI and PostgreSQL (authentication, role-based access control, REST APIs) and developed React admin/vendor/super-admin dashboards for catalog, order, booking, content, and user management, with real-time features via Socket.IO shared across web and mobile.",
+            "Full-stack delivery: Delivered UMNO end-to-end — consumer app, web application, and admin panel — for an Australian food-saving marketplace connecting restaurants with surplus meals to nearby diners, including vendor management and CO2/waste reporting.",
+            "Release ownership: Authored Jest test suites and configured CI/CD pipelines; owned end-to-end release cycles (build signing, provisioning) across Agile sprints, shipping 9 production apps and their web panels with Crashlytics/Sentry monitoring.",
         ],
     },
     {
         company: "DataPecan",
-        role: "Software Developer",
+        role: "Software Developer (Mobile & Web)",
         period: "Apr 2024 – Aug 2025",
         points: [
-            "Led the end-to-end development of a Music Learning Academy mobile application with 15+ interactive lessons, achieving a 30% improvement in onboarding completion.",
-            "Engineered a comprehensive suite of unit and integration tests, increasing code coverage from 60% to 90% and improving overall app stability by 20% including fixing crash causes.",
-            "Implemented real-time features and state management solutions using Redux/Zustand to ensure seamless data synchronization and high-performance user experiences.",
-            "Optimized application performance through advanced profiling and memory management, reducing overall crash rates and significantly improving responsiveness.",
+            "Mobile/Web: Led end-to-end development of a Music Learning Academy platform — a React Native app with 15+ interactive lessons and teacher-guided workflows, plus a web management side for lessons, users, and content — reaching production with a ~30% improvement in onboarding completion.",
+            "Backend: Built 12 REST API endpoints and integrated the frontend with a Firebase backend.",
+            "Quality: Engineered a comprehensive Jest unit/integration test suite, raising code coverage from 60% to 90% and cutting crash-related instability by ~20%, resolving key crash causes in two-week Agile sprints with product and design.",
         ],
     },
     {
         company: "Hidden Talent",
-        role: "Junior Software Developer",
-        period: "Jun 2023 – Mar 2024",
+        role: "Junior Software Developer (Full-Stack)",
+        period: "Jan 2023 – Mar 2024",
         points: [
-            "Delivered and optimized the GreenValley School mobile application using React Native, focusing on UI consistency and performance.",
-            "Collaborated with senior developers in an Agile environment to integrate REST APIs, resolve 20+ critical bugs, and deliver sprint-based features on schedule.",
-            "Assisted in generating stable Android and iOS builds using Android Studio and Xcode, ensuring 100% compliance with platform-specific store guidelines.",
+            "Full-stack: Delivered the GreenValley School platform (React Native mobile app + web) supporting academic and communication workflows for students, staff, and administrators, integrating REST APIs alongside senior developers.",
+            "Quality: Resolved 20+ critical bugs, improving platform robustness by ~15% through consistent Agile sprint delivery.",
         ],
     },
 ];
 
 const ExperienceSection = () => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section id="experience" className="section-padding theme-green bg-background group section-hover-heading">
             <div className="max-w-4xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
                     className="relative"
                 >
                     <motion.div
-                        animate={{ y: [0, -8, 0], opacity: [0.5, 0.8, 0.5] }}
+                        animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], opacity: [0.5, 0.8, 0.5] }}
                         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute -top-6 right-0 h-20 w-20 rounded-full bg-primary/10 blur-3xl"
                     />
@@ -82,9 +82,9 @@ const ExperienceSection = () => {
                     {/* Timeline line */}
                     <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-border" />
 
-                    <motion.div 
+                    <motion.div
                         variants={containerVariants}
-                        initial="hidden"
+                        initial={shouldReduceMotion ? false : "hidden"}
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                         className="space-y-10"

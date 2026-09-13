@@ -7,6 +7,9 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AnimatePresence, motion } from "framer-motion";
+import { MousePositionProvider } from "@/hooks/use-mouse-position";
+import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const queryClient = new QueryClient();
 
@@ -16,22 +19,26 @@ const App = () => (
             <TooltipProvider>
                 <Toaster />
                 <Sonner />
-                <BrowserRouter>
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="min-h-screen bg-background"
-                        >
-                            <Routes>
-                                <Route path="/" element={<Index />} />
-                                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                                <Route path="*" element={<NotFound />} />
-                            </Routes>
-                        </motion.div>
-                    </AnimatePresence>
-                </BrowserRouter>
+                <SmoothScroll />
+                <MousePositionProvider>
+                    <CustomCursor />
+                    <BrowserRouter>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="min-h-screen bg-background"
+                            >
+                                <Routes>
+                                    <Route path="/" element={<Index />} />
+                                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                                    <Route path="*" element={<NotFound />} />
+                                </Routes>
+                            </motion.div>
+                        </AnimatePresence>
+                    </BrowserRouter>
+                </MousePositionProvider>
             </TooltipProvider>
         </QueryClientProvider>
     </ThemeProvider>
