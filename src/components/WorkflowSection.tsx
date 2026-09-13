@@ -1,21 +1,22 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
-    FiTarget, 
-    FiPenTool, 
-    FiCode, 
-    FiLayers, 
-    FiServer, 
-    FiDatabase, 
-    FiCheckCircle, 
-    FiActivity, 
-    FiGitCommit, 
-    FiTerminal, 
-    FiSmartphone, 
-    FiMonitor, 
-    FiUploadCloud, 
-    FiPackage, 
+    FiTarget,
+    FiPenTool,
+    FiCode,
+    FiGlobe,
+    FiLayers,
+    FiServer,
+    FiDatabase,
+    FiCheckCircle,
+    FiActivity,
+    FiGitCommit,
+    FiTerminal,
+    FiSmartphone,
+    FiMonitor,
+    FiUploadCloud,
+    FiPackage,
     FiTool,
-    FiRefreshCw 
+    FiRefreshCw
 } from "react-icons/fi";
 
 const containerVariants = {
@@ -31,21 +32,22 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { opacity: 0, scale: 0.9, y: 20 },
-    visible: { 
-        opacity: 1, 
+    visible: {
+        opacity: 1,
         scale: 1,
-        y: 0, 
-        transition: { type: "spring", stiffness: 100, damping: 15 } 
+        y: 0,
+        transition: { duration: 0.35, ease: "easeOut" },
     },
 };
 
 const steps = [
-    { icon: FiTarget, title: "Idea / Requirements", desc: "Brainstorming and gathering core requirements for the mobile app" },
+    { icon: FiTarget, title: "Idea / Requirements", desc: "Brainstorming and gathering core requirements for the app and web platform" },
     { icon: FiPenTool, title: "UI Design (Figma)", desc: "Crafting beautiful interfaces and user experiences using Figma" },
-    { icon: FiCode, title: "React Native Dev", desc: "Writing cross-platform views and complex business logic" },
+    { icon: FiCode, title: "React Native Dev", desc: "Writing cross-platform mobile views and complex business logic" },
+    { icon: FiGlobe, title: "Web Dev (React/Next.js)", desc: "Building React.js/Next.js web dashboards and admin panels" },
     { icon: FiLayers, title: "State Management", desc: "Structuring data effectively with Redux & Zustand" },
-    { icon: FiServer, title: "API Integration", desc: "Connecting effortlessly to robust REST and GraphQL APIs" },
-    { icon: FiDatabase, title: "Backend Services", desc: "Hooking up Firebase or Supabase ecosystems to the frontend" },
+    { icon: FiServer, title: "API Integration", desc: "Designing REST and GraphQL APIs with FastAPI & Node.js" },
+    { icon: FiDatabase, title: "Backend Services", desc: "Hooking up PostgreSQL, Firebase, or Supabase ecosystems to app and web" },
     { icon: FiCheckCircle, title: "Unit Testing", desc: "Guaranteeing isolated logic validity with comprehensive Jest tests" },
     { icon: FiActivity, title: "UI Flow Testing", desc: "Automating user flows and visual testing using Maestro" },
     { icon: FiGitCommit, title: "Git Version Control", desc: "Managing clean branches and peer reviews through Git" },
@@ -53,24 +55,26 @@ const steps = [
     { icon: FiRefreshCw, title: "CI/CD Pipeline", desc: "Automated builds, testing, and deployment using GitHub Actions or GitLab CI" },
     { icon: FiSmartphone, title: "Android Build", desc: "Compiling highly optimized APK/AAB outputs via Android Studio" },
     { icon: FiMonitor, title: "iOS Build", desc: "Signing and building secure IPA artifacts natively using Xcode" },
-    { icon: FiUploadCloud, title: "Deployment Prep", desc: "Pushing artifacts seamlessly to TestFlight and Google Play Console" },
+    { icon: FiUploadCloud, title: "Web Deployment", desc: "Containerizing with Docker and deploying web apps and APIs" },
     { icon: FiPackage, title: "Store Release", desc: "Managing staged rollouts and App Store review validation processes" },
-    { icon: FiTool, title: "Monitoring & Updates", desc: "Tracking live metrics, analyzing crash reports, and shipping patches" },
+    { icon: FiTool, title: "Monitoring & Updates", desc: "Tracking live metrics via Crashlytics/Sentry and shipping patches" },
 ];
 
 const WorkflowSection = () => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section id="workflow" className="section-padding theme-beige bg-[#f7f1df] overflow-hidden group section-hover-heading">
             <div className="max-w-[1400px] mx-auto">
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
+                    initial={shouldReduceMotion ? false : "hidden"}
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     className="max-w-7xl mx-auto px-4 md:px-8 relative"
                 >
                     <motion.div
-                        animate={{ y: [0, -8, 0], opacity: [0.3, 0.7, 0.3] }}
+                        animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], opacity: [0.3, 0.7, 0.3] }}
                         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute -top-4 right-4 h-16 w-16 rounded-full bg-primary/10 blur-3xl"
                     />
@@ -82,22 +86,22 @@ const WorkflowSection = () => {
 
                 {/* Horizontal Timeline Container */}
                 <div className="relative w-full overflow-x-auto pb-16 pt-6 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                    
-                    <motion.div 
+
+                    <motion.div
                         variants={containerVariants}
-                        initial="hidden"
+                        initial={shouldReduceMotion ? false : "hidden"}
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                         className="flex gap-6 w-max px-4 sm:px-8 relative"
                     >
                         {/* Connecting Continuous Line */}
                         <div className="absolute top-[34px] left-8 right-8 h-1 bg-border/40 shrink-0" />
-                        <motion.div 
-                            initial={{ scaleX: 0 }}
+                        <motion.div
+                            initial={shouldReduceMotion ? false : { scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.5, ease: "easeInOut" }}
-                            className="absolute top-[34px] left-8 w-[95%] h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent shrink-0 origin-left" 
+                            className="absolute top-[34px] left-8 w-[95%] h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent shrink-0 origin-left"
                         />
 
                         {steps.map((step, i) => (

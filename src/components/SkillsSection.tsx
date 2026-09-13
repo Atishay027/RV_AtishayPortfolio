@@ -1,13 +1,15 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
     FiCode,
     FiSmartphone,
+    FiGlobe,
     FiServer,
     FiLayers,
     FiCheckCircle,
     FiTool,
     FiCpu,
 } from "react-icons/fi";
+import TechMarquee from "@/components/TechMarquee";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -25,7 +27,7 @@ const cardVariants = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { type: "spring", stiffness: 80, damping: 15 }
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
 
@@ -44,7 +46,7 @@ const pillVariants = {
     visible: {
         opacity: 1,
         scale: 1,
-        transition: { type: "spring", stiffness: 150, damping: 10 }
+        transition: { duration: 0.3, ease: "easeOut" },
     },
 };
 
@@ -52,32 +54,37 @@ const skillCategories = [
     {
         title: "Languages",
         icon: FiCode,
-        skills: ["TypeScript", "JavaScript (ES6+)", "Python", "C++"],
+        skills: ["TypeScript", "JavaScript (ES6+)", "Python", "Java", "Kotlin", "Swift", "C++"],
     },
     {
-        title: "Mobile & Frontend",
+        title: "Mobile",
         icon: FiSmartphone,
-        skills: ["React Native", "React.js", "Redux", "Zustand", "React Navigation", "NativeWind", "MMKV"],
+        skills: ["React Native", "React Navigation", "Redux", "Zustand", "NativeWind", "MMKV", "Native Modules (Swift/Kotlin)", "Push Notifications", "Deep Linking"],
     },
     {
-        title: "Backend & Data",
+        title: "Web & Frontend",
+        icon: FiGlobe,
+        skills: ["React.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Responsive Web UI"],
+    },
+    {
+        title: "Backend & Databases",
         icon: FiServer,
-        skills: ["FastAPI", "PostgreSQL", "Node.js", "Express.js", "Firebase", "Supabase", "REST APIs", "GraphQL Basics", "Socket.IO"],
+        skills: ["FastAPI", "Node.js", "Express.js", "REST APIs", "GraphQL", "Socket.IO", "JWT/OAuth", "PostgreSQL", "MySQL", "Firebase", "Supabase"],
     },
     {
-        title: "App Experience",
+        title: "App & Web Experience",
         icon: FiLayers,
-        skills: ["Push Notifications", "Deep Linking", "Authentication", "Onboarding Flows", "Performance Optimization"],
+        skills: ["Authentication", "Role-Based Access Control", "Onboarding Flows", "Offline Caching", "Performance Optimization"],
     },
     {
         title: "Testing & Delivery",
         icon: FiCheckCircle,
-        skills: ["Jest", "React Native Testing Library", "GitHub Actions", "App Store Connect", "Play Console", "CI/CD"],
+        skills: ["Jest", "React Native Testing Library", "GitHub Actions", "Docker", "App Store Connect", "Play Console", "Crashlytics", "Sentry"],
     },
     {
         title: "Tools & Methodologies",
         icon: FiTool,
-        skills: ["Git", "GitHub", "GitLab", "Docker", "Android Studio", "Xcode", "Jira", "Figma", "Postman", "Agile/Scrum", "Code Reviews", "DSA", "OOPs"],
+        skills: ["Git", "GitHub", "GitLab", "Android Studio", "Xcode", "Jira", "Figma", "Postman", "Agile/Scrum", "Code Reviews", "DSA", "OOPs"],
     },
     {
         title: "AI & Productivity",
@@ -87,18 +94,20 @@ const skillCategories = [
 ];
 
 const SkillsSection = () => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section id="skills" className="section-padding theme-beige bg-[#f7f1df] group section-hover-heading">
             <div className="max-w-7xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
                     className="relative"
                 >
                     <motion.div
-                        animate={{ y: [0, -6, 0], scale: [1, 1.02, 1] }}
+                        animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], scale: [1, 1.02, 1] }}
                         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute -top-8 right-0 h-24 w-24 rounded-full bg-primary/10 blur-3xl"
                     />
@@ -108,9 +117,13 @@ const SkillsSection = () => {
                     <div className="w-16 h-1 bg-gradient-primary rounded-full mb-10" />
                 </motion.div>
 
+                <div className="mb-12">
+                    <TechMarquee />
+                </div>
+
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
+                    initial={shouldReduceMotion ? false : "hidden"}
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -128,7 +141,7 @@ const SkillsSection = () => {
                             </h3>
                             <motion.div
                                 variants={pillContainerVariants}
-                                initial="hidden"
+                                initial={shouldReduceMotion ? false : "hidden"}
                                 whileInView="visible"
                                 viewport={{ once: true }}
                                 className="flex flex-wrap gap-2"

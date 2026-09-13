@@ -14,22 +14,23 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.03 }}
-                        className="text-xs text-muted-foreground/80 hover:text-primary transition-colors"
+                        className="text-xs text-muted-foreground hover:text-primary transition-colors"
                     >
                         Animations inspired by Motion.dev
                     </motion.a>
                 </div>
                 <div className="flex items-center gap-3">
                     {[
-                        { icon: FiGithub, href: "https://github.com/Atishay027" },
-                        { icon: FiLinkedin, href: "https://www.linkedin.com/in/atishayjain027/" },
-                        { icon: FiMail, href: "mailto:atishay027@gmail.com" },
-                    ].map((s, i) => (
+                        { icon: FiGithub, href: "https://github.com/Atishay027", label: "GitHub" },
+                        { icon: FiLinkedin, href: "https://www.linkedin.com/in/atishayjain027/", label: "LinkedIn" },
+                        { icon: FiMail, href: "mailto:atishay027@gmail.com", label: "Email" },
+                    ].map((s) => (
                         <motion.a
-                            key={i}
+                            key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={s.label}
                             whileHover={{ y: -2, scale: 1.08 }}
                             className="text-muted-foreground hover:text-primary transition-colors"
                         >
